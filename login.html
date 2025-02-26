@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <main>
+        <div class="masterContainer">
+            <div id="loginbox">
+                <div class="boxArea" id="graphic">
+                    <img src="./Graphic designing/flowers.png" alt="" id="graphicImage">
+                    <p>it's good to have you back</p>
+                </div>
+                <div class="boxArea" id="LoginArea">
+                    <form id="loginForm">
+                        <div class="boxItems">
+                            <img src="./Graphic designing/logo_small.png" alt="">
+                        </div>
+                        <div class="boxItems">
+                            <p>Welcome User</p>
+                        </div>
+                        <div class="boxItems inputs">
+                            <label for="username">username</label>       
+                            <input type="text" id="username" required>
+                        </div>
+                        <div class="boxItems inputs">
+                            <label for="pword">password</label>  
+                            <input type="password" id="pword" required>
+                        </div>
+                        <div class="boxItems">                            
+                            <input type="submit" value="SIGN IN" id="submitButton">      
+                        </div>
+                        <div class="boxItems" id="log-on">
+                            <p>New to Fortunez? <a href="./signup.html">Create Account</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Attach event listener to the form
+        let form = document.getElementById("loginForm");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("pword").value;
+
+            // Retrieve stored users from localStorage
+            let storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check if the user exists and password matches
+            let userFound = storedUsers.find(
+                (user) => user.username === username && user.password === password
+            );
+
+            if (userFound) {
+                alert(`Login successful! Welcome back, ${userFound.username}`);
+                // Redirect to the index page
+                window.location.href = "index.html";
+            } else {
+                alert("Login failed! Invalid username or password.");
+            }
+        });
+    </script>
+</body>
+</html>
